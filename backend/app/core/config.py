@@ -76,7 +76,7 @@ class APIConfig(BaseSettings):
 class DatabaseConfig(BaseSettings):
     """Database configuration"""
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file="../.env",
         env_prefix="DB_",
         case_sensitive=False,
         extra="ignore"
