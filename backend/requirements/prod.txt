@@ -1,0 +1,14 @@
+-r base.txt
+
+# Production-specific
+gunicorn==21.2.0
+gevent==23.7.0
+
+# Security
+bandit==1.7.5
+
+# Monitoring
+sentry-sdk[flask]==1.38.0
+
+# Performance
+ujson==5.8.0
