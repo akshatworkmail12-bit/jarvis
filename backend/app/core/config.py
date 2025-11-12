@@ -87,7 +87,6 @@ class DatabaseConfig(BaseSettings):
 class SecurityConfig(BaseSettings):
     """Security configuration"""
     model_config = SettingsConfigDict(
-        env_file="../.env",
         env_prefix="SECURITY_",
         case_sensitive=False,
         extra="ignore"
