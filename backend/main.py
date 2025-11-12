@@ -4,12 +4,17 @@ Professional modular architecture with API versioning and comprehensive services
 """
 
 import os
+import sys
 from flask import Flask
 from flask_cors import CORS
-from .core.config import config
-from .core.logging import get_logger, log_system_event
-from .api.middleware import setup_middleware
-from .api.v1 import commands_bp, system_bp, files_bp, media_bp
+
+# Add the backend directory to Python path for absolute imports
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from core.config import config
+from core.logging import get_logger, log_system_event
+from api.middleware import setup_middleware
+from api.v1 import commands_bp, system_bp, files_bp, media_bp
 
 # Initialize logger
 logger = get_logger(__name__)

@@ -3,14 +3,25 @@ Configuration management for JARVIS AI
 Uses Pydantic for validation and environment variable handling
 """
 
-from pydantic import BaseSettings, Field
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional, Dict, Any
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from parent directory
+load_dotenv("../.env")
 
 
 class LLMConfig(BaseSettings):
     """LLM configuration settings"""
+    model_config = SettingsConfigDict(
+        env_prefix="LLM_",
+        case_sensitive=False,
+        extra="ignore"
+    )
+
     provider: str = Field(default="openrouter", description="LLM provider")
     api_key: str = Field(..., description="API key for LLM service")
     api_base: str = Field(default="https://openrouter.ai/api/v1", description="API base URL")
@@ -18,12 +29,15 @@ class LLMConfig(BaseSettings):
     vision_model: str = Field(default="gpt-4o", description="Vision model name")
     enable_reasoning: bool = Field(default=True, description="Enable reasoning for compatible models")
 
-    class Config:
-        env_prefix = "LLM_"
-
 
 class VoiceConfig(BaseSettings):
     """Voice service configuration"""
+    model_config = SettingsConfigDict(
+        env_prefix="VOICE_",
+        case_sensitive=False,
+        extra="ignore"
+    )
+
     enabled: bool = Field(default=True, description="Enable voice features")
     rate: int = Field(default=230, description="Speech rate")
     volume: float = Field(default=1.0, description="Speech volume")
@@ -31,57 +45,69 @@ class VoiceConfig(BaseSettings):
     energy_threshold: int = Field(default=4000, description="Microphone energy threshold")
     dynamic_energy_threshold: bool = Field(default=True, description="Enable dynamic energy threshold")
 
-    class Config:
-        env_prefix = "VOICE_"
-
 
 class SystemConfig(BaseSettings):
     """System configuration settings"""
+    model_config = SettingsConfigDict(
+        env_prefix="SYSTEM_",
+        case_sensitive=False,
+        extra="ignore"
+    )
+
     os_type: str = Field(default_factory=lambda: os.name, description="Operating system")
     pyautogui_failsafe: bool = Field(default=True, description="Enable PyAutoGUI failsafe")
     pyautogui_pause: float = Field(default=0.5, description="PyAutoGUI pause between actions")
 
-    class Config:
-        env_prefix = "SYSTEM_"
-
 
 class APIConfig(BaseSettings):
     """API server configuration"""
+    model_config = SettingsConfigDict(
+        env_prefix="API_",
+        case_sensitive=False,
+        extra="ignore"
+    )
+
     host: str = Field(default="0.0.0.0", description="API server host")
     port: int = Field(default=5000, description="API server port")
     debug: bool = Field(default=False, description="Enable debug mode")
     cors_origins: list = Field(default=["*"], description="CORS allowed origins")
 
-    class Config:
-        env_prefix = "API_"
-
 
 class DatabaseConfig(BaseSettings):
     """Database configuration"""
-    url: str = Field(default="sqlite:///jarvis.db", description="Database connection URL")
+    model_config = SettingsConfigDict(
+        env_prefix="DB_",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
-    class Config:
-        env_prefix = "DB_"
+    url: str = Field(default="sqlite:///jarvis.db", description="Database connection URL")
 
 
 class SecurityConfig(BaseSettings):
     """Security configuration"""
+    model_config = SettingsConfigDict(
+        env_prefix="SECURITY_",
+        case_sensitive=False,
+        extra="ignore"
+    )
+
     jwt_secret: str = Field(..., description="JWT secret key")
     jwt_algorithm: str = Field(default="HS256", description="JWT algorithm")
     jwt_expiry_hours: int = Field(default=24, description="JWT expiry in hours")
 
-    class Config:
-        env_prefix = "SECURITY_"
-
 
 class LoggingConfig(BaseSettings):
     """Logging configuration"""
+    model_config = SettingsConfigDict(
+        env_prefix="LOG_",
+        case_sensitive=False,
+        extra="ignore"
+    )
+
     level: str = Field(default="INFO", description="Log level")
     format: str = Field(default="json", description="Log format (json or text)")
     file_path: Optional[str] = Field(default=None, description="Log file path")
-
-    class Config:
-        env_prefix = "LOG_"
 
 
 class Config:
@@ -91,13 +117,13 @@ class Config:
         self.env_file = env_file or ".env"
 
         # Load all configuration modules
-        self.llm = LLMConfig(_env_file=self.env_file)
-        self.voice = VoiceConfig(_env_file=self.env_file)
-        self.system = SystemConfig(_env_file=self.env_file)
-        self.api = APIConfig(_env_file=self.env_file)
-        self.database = DatabaseConfig(_env_file=self.env_file)
-        self.security = SecurityConfig(_env_file=self.env_file)
-        self.logging = LoggingConfig(_env_file=self.env_file)
+        self.llm = LLMConfig()
+        self.voice = VoiceConfig()
+        self.system = SystemConfig()
+        self.api = APIConfig()
+        self.database = DatabaseConfig()
+        self.security = SecurityConfig()
+        self.logging = LoggingConfig()
 
         # Load application settings
         self._load_app_settings()
@@ -159,13 +185,13 @@ class Config:
 
     def reload(self):
         """Reload configuration from environment"""
-        self.llm = LLMConfig(_env_file=self.env_file)
-        self.voice = VoiceConfig(_env_file=self.env_file)
-        self.system = SystemConfig(_env_file=self.env_file)
-        self.api = APIConfig(_env_file=self.env_file)
-        self.database = DatabaseConfig(_env_file=self.env_file)
-        self.security = SecurityConfig(_env_file=self.env_file)
-        self.logging = LoggingConfig(_env_file=self.env_file)
+        self.llm = LLMConfig()
+        self.voice = VoiceConfig()
+        self.system = SystemConfig()
+        self.api = APIConfig()
+        self.database = DatabaseConfig()
+        self.security = SecurityConfig()
+        self.logging = LoggingConfig()
         self._load_app_settings()
 
 
