@@ -108,9 +108,9 @@ class LoggingConfig(BaseSettings):
         extra="ignore"
     )
 
-    level: str = Field(default="INFO", description="Log level", alias="LEVEL")
-    format: str = Field(default="json", description="Log format (json or text)", alias="FORMAT")
-    file_path: Optional[str] = Field(default=None, description="Log file path", alias="FILE_PATH")
+    level: str = Field(default="INFO", description="Log level")
+    format: str = Field(default="json", description="Log format (json or text)")
+    file_path: Optional[str] = Field(default=None, description="Log file path")
 
 
 class Config:
