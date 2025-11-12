@@ -53,9 +53,9 @@ class SystemConfig(BaseSettings):
         extra="ignore"
     )
 
-    os_type: str = Field(default_factory=lambda: os.name, description="Operating system", alias="OS_TYPE")
-    pyautogui_failsafe: bool = Field(default=True, description="Enable PyAutoGUI failsafe", alias="PYAUTOGUI_FAILSAFE")
-    pyautogui_pause: float = Field(default=0.5, description="PyAutoGUI pause between actions", alias="PYAUTOGUI_PAUSE")
+    os_type: str = Field(default_factory=lambda: os.name, description="Operating system")
+    pyautogui_failsafe: bool = Field(default=True, description="Enable PyAutoGUI failsafe")
+    pyautogui_pause: float = Field(default=0.5, description="PyAutoGUI pause between actions")
 
 
 class APIConfig(BaseSettings):
