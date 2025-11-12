@@ -46,12 +46,16 @@ class VoiceConfig(BaseSettings):
 
 class SystemConfig(BaseSettings):
     """System configuration settings"""
-    os_type: str = Field(default_factory=lambda: os.name, description="Operating system")
-    pyautogui_failsafe: bool = Field(default=True, description="Enable PyAutoGUI failsafe")
-    pyautogui_pause: float = Field(default=0.5, description="PyAutoGUI pause between actions")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="SYSTEM_",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
-    class Config:
-        env_prefix = "SYSTEM_"
+    os_type: str = Field(default_factory=lambda: os.name, description="Operating system", alias="OS_TYPE")
+    pyautogui_failsafe: bool = Field(default=True, description="Enable PyAutoGUI failsafe", alias="PYAUTOGUI_FAILSAFE")
+    pyautogui_pause: float = Field(default=0.5, description="PyAutoGUI pause between actions", alias="PYAUTOGUI_PAUSE")
 
 
 class APIConfig(BaseSettings):
