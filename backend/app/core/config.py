@@ -3,7 +3,8 @@ Configuration management for JARVIS AI
 Uses Pydantic for validation and environment variable handling
 """
 
-from pydantic import BaseSettings, Field
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional, Dict, Any
 import os
 from pathlib import Path
