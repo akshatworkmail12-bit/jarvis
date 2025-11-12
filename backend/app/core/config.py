@@ -94,9 +94,9 @@ class SecurityConfig(BaseSettings):
         extra="ignore"
     )
 
-    jwt_secret: str = Field(..., description="JWT secret key", alias="JWT_SECRET")
-    jwt_algorithm: str = Field(default="HS256", description="JWT algorithm", alias="JWT_ALGORITHM")
-    jwt_expiry_hours: int = Field(default=24, description="JWT expiry in hours", alias="JWT_EXPIRY_HOURS")
+    jwt_secret: str = Field(..., description="JWT secret key")
+    jwt_algorithm: str = Field(default="HS256", description="JWT algorithm")
+    jwt_expiry_hours: int = Field(default=24, description="JWT expiry in hours")
 
 
 class LoggingConfig(BaseSettings):
