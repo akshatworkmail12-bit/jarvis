@@ -67,10 +67,10 @@ class APIConfig(BaseSettings):
         extra="ignore"
     )
 
-    host: str = Field(default="0.0.0.0", description="API server host", alias="HOST")
-    port: int = Field(default=5000, description="API server port", alias="PORT")
-    debug: bool = Field(default=False, description="Enable debug mode", alias="DEBUG")
-    cors_origins: list = Field(default=["*"], description="CORS allowed origins", alias="CORS_ORIGINS")
+    host: str = Field(default="0.0.0.0", description="API server host")
+    port: int = Field(default=5000, description="API server port")
+    debug: bool = Field(default=False, description="Enable debug mode")
+    cors_origins: list = Field(default=["*"], description="CORS allowed origins")
 
 
 class DatabaseConfig(BaseSettings):
