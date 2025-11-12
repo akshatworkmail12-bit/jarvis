@@ -60,13 +60,17 @@ class SystemConfig(BaseSettings):
 
 class APIConfig(BaseSettings):
     """API server configuration"""
-    host: str = Field(default="0.0.0.0", description="API server host")
-    port: int = Field(default=5000, description="API server port")
-    debug: bool = Field(default=False, description="Enable debug mode")
-    cors_origins: list = Field(default=["*"], description="CORS allowed origins")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="API_",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
-    class Config:
-        env_prefix = "API_"
+    host: str = Field(default="0.0.0.0", description="API server host", alias="HOST")
+    port: int = Field(default=5000, description="API server port", alias="PORT")
+    debug: bool = Field(default=False, description="Enable debug mode", alias="DEBUG")
+    cors_origins: list = Field(default=["*"], description="CORS allowed origins", alias="CORS_ORIGINS")
 
 
 class DatabaseConfig(BaseSettings):
