@@ -87,12 +87,16 @@ class DatabaseConfig(BaseSettings):
 
 class SecurityConfig(BaseSettings):
     """Security configuration"""
-    jwt_secret: str = Field(..., description="JWT secret key")
-    jwt_algorithm: str = Field(default="HS256", description="JWT algorithm")
-    jwt_expiry_hours: int = Field(default=24, description="JWT expiry in hours")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="SECURITY_",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
-    class Config:
-        env_prefix = "SECURITY_"
+    jwt_secret: str = Field(..., description="JWT secret key", alias="JWT_SECRET")
+    jwt_algorithm: str = Field(default="HS256", description="JWT algorithm", alias="JWT_ALGORITHM")
+    jwt_expiry_hours: int = Field(default=24, description="JWT expiry in hours", alias="JWT_EXPIRY_HOURS")
 
 
 class LoggingConfig(BaseSettings):
