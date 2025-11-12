@@ -102,7 +102,7 @@ class SecurityConfig(BaseSettings):
 class LoggingConfig(BaseSettings):
     """Logging configuration"""
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file="../.env",
         env_prefix="LOG_",
         case_sensitive=False,
         extra="ignore"
