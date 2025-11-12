@@ -25,10 +25,6 @@ class LLMConfig(BaseSettings):
     model: str = Field(default="openai/gpt-oss-20b:free", description="Text model name", alias="MODEL")
     vision_model: str = Field(default="gpt-4o", description="Vision model name", alias="VISION_MODEL")
     enable_reasoning: bool = Field(default=True, description="Enable reasoning for compatible models", alias="ENABLE_REASONING")
-    api_key: str = Field(..., description="API key for LLM service", alias="API_KEY")
-    api_base: str = Field(default="https://openrouter.ai/api/v1", description="API base URL", alias="API_BASE")
-    model: str = Field(default="openai/gpt-oss-20b:free", description="Text model name", alias="MODEL")
-    vision_model: str = Field(default="gpt-4o", description="Vision model name", alias="VISION_MODEL")
     enable_reasoning: bool = Field(default=True, description="Enable reasoning for compatible models", alias="ENABLE_REASONING")
 
 
