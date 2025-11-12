@@ -47,7 +47,7 @@ class VoiceConfig(BaseSettings):
 class SystemConfig(BaseSettings):
     """System configuration settings"""
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file="../.env",
         env_prefix="SYSTEM_",
         case_sensitive=False,
         extra="ignore"
