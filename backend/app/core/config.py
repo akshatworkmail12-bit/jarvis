@@ -82,7 +82,7 @@ class DatabaseConfig(BaseSettings):
         extra="ignore"
     )
 
-    url: str = Field(default="sqlite:///jarvis.db", description="Database connection URL", alias="URL")
+    url: str = Field(default="sqlite:///jarvis.db", description="Database connection URL")
 
 
 class SecurityConfig(BaseSettings):
