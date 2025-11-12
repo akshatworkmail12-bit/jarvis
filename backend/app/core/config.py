@@ -29,15 +29,19 @@ class LLMConfig(BaseSettings):
 
 class VoiceConfig(BaseSettings):
     """Voice service configuration"""
-    enabled: bool = Field(default=True, description="Enable voice features")
-    rate: int = Field(default=230, description="Speech rate")
-    volume: float = Field(default=1.0, description="Speech volume")
-    pitch: float = Field(default=1.5, description="Speech pitch")
-    energy_threshold: int = Field(default=4000, description="Microphone energy threshold")
-    dynamic_energy_threshold: bool = Field(default=True, description="Enable dynamic energy threshold")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="VOICE_",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
-    class Config:
-        env_prefix = "VOICE_"
+    enabled: bool = Field(default=True, description="Enable voice features", alias="ENABLED")
+    rate: int = Field(default=230, description="Speech rate", alias="RATE")
+    volume: float = Field(default=1.0, description="Speech volume", alias="VOLUME")
+    pitch: float = Field(default=1.5, description="Speech pitch", alias="PITCH")
+    energy_threshold: int = Field(default=4000, description="Microphone energy threshold", alias="ENERGY_THRESHOLD")
+    dynamic_energy_threshold: bool = Field(default=True, description="Enable dynamic energy threshold", alias="DYNAMIC_ENERGY_THRESHOLD")
 
 
 class SystemConfig(BaseSettings):
