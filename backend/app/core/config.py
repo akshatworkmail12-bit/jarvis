@@ -61,7 +61,7 @@ class SystemConfig(BaseSettings):
 class APIConfig(BaseSettings):
     """API server configuration"""
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file="../.env",
         env_prefix="API_",
         case_sensitive=False,
         extra="ignore"
