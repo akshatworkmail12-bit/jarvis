@@ -12,15 +12,19 @@ from pathlib import Path
 
 class LLMConfig(BaseSettings):
     """LLM configuration settings"""
-    provider: str = Field(default="openrouter", description="LLM provider")
-    api_key: str = Field(..., description="API key for LLM service")
-    api_base: str = Field(default="https://openrouter.ai/api/v1", description="API base URL")
-    model: str = Field(default="openai/gpt-oss-20b:free", description="Text model name")
-    vision_model: str = Field(default="gpt-4o", description="Vision model name")
-    enable_reasoning: bool = Field(default=True, description="Enable reasoning for compatible models")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="LLM_",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
-    class Config:
-        env_prefix = "LLM_"
+    provider: str = Field(default="openrouter", description="LLM provider", alias="PROVIDER")
+    api_key: str = Field(..., description="API key for LLM service", alias="API_KEY")
+    api_base: str = Field(default="https://openrouter.ai/api/v1", description="API base URL", alias="API_BASE")
+    model: str = Field(default="openai/gpt-oss-20b:free", description="Text model name", alias="MODEL")
+    vision_model: str = Field(default="gpt-4o", description="Vision model name", alias="VISION_MODEL")
+    enable_reasoning: bool = Field(default=True, description="Enable reasoning for compatible models", alias="ENABLE_REASONING")
 
 
 class VoiceConfig(BaseSettings):
