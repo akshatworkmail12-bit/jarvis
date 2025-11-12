@@ -75,10 +75,14 @@ class APIConfig(BaseSettings):
 
 class DatabaseConfig(BaseSettings):
     """Database configuration"""
-    url: str = Field(default="sqlite:///jarvis.db", description="Database connection URL")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="DB_",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
-    class Config:
-        env_prefix = "DB_"
+    url: str = Field(default="sqlite:///jarvis.db", description="Database connection URL", alias="URL")
 
 
 class SecurityConfig(BaseSettings):
