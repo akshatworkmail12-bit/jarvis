@@ -188,13 +188,13 @@ class Config:
 
     def reload(self):
         """Reload configuration from environment"""
-        self.llm = LLMConfig(_env_file=self.env_file)
-        self.voice = VoiceConfig(_env_file=self.env_file)
-        self.system = SystemConfig(_env_file=self.env_file)
-        self.api = APIConfig(_env_file=self.env_file)
-        self.database = DatabaseConfig(_env_file=self.env_file)
-        self.security = SecurityConfig(_env_file=self.env_file)
-        self.logging = LoggingConfig(_env_file=self.env_file)
+        self.llm = LLMConfig()
+        self.voice = VoiceConfig()
+        self.system = SystemConfig()
+        self.api = APIConfig()
+        self.database = DatabaseConfig()
+        self.security = SecurityConfig()
+        self.logging = LoggingConfig()
         self._load_app_settings()
 
 
