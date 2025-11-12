@@ -36,12 +36,12 @@ class VoiceConfig(BaseSettings):
         extra="ignore"
     )
 
-    enabled: bool = Field(default=True, description="Enable voice features", alias="ENABLED")
-    rate: int = Field(default=230, description="Speech rate", alias="RATE")
-    volume: float = Field(default=1.0, description="Speech volume", alias="VOLUME")
-    pitch: float = Field(default=1.5, description="Speech pitch", alias="PITCH")
-    energy_threshold: int = Field(default=4000, description="Microphone energy threshold", alias="ENERGY_THRESHOLD")
-    dynamic_energy_threshold: bool = Field(default=True, description="Enable dynamic energy threshold", alias="DYNAMIC_ENERGY_THRESHOLD")
+    enabled: bool = Field(default=True, description="Enable voice features")
+    rate: int = Field(default=230, description="Speech rate")
+    volume: float = Field(default=1.0, description="Speech volume")
+    pitch: float = Field(default=1.5, description="Speech pitch")
+    energy_threshold: int = Field(default=4000, description="Microphone energy threshold")
+    dynamic_energy_threshold: bool = Field(default=True, description="Enable dynamic energy threshold")
 
 
 class SystemConfig(BaseSettings):
