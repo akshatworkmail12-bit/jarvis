@@ -101,12 +101,16 @@ class SecurityConfig(BaseSettings):
 
 class LoggingConfig(BaseSettings):
     """Logging configuration"""
-    level: str = Field(default="INFO", description="Log level")
-    format: str = Field(default="json", description="Log format (json or text)")
-    file_path: Optional[str] = Field(default=None, description="Log file path")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="LOG_",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
-    class Config:
-        env_prefix = "LOG_"
+    level: str = Field(default="INFO", description="Log level", alias="LEVEL")
+    format: str = Field(default="json", description="Log format (json or text)", alias="FORMAT")
+    file_path: Optional[str] = Field(default=None, description="Log file path", alias="FILE_PATH")
 
 
 class Config:
