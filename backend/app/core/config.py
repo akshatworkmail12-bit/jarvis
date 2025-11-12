@@ -13,7 +13,7 @@ from pathlib import Path
 class LLMConfig(BaseSettings):
     """LLM configuration settings"""
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file="../.env",
         env_prefix="LLM_",
         case_sensitive=False,
         extra="ignore"
