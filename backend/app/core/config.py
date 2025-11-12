@@ -8,6 +8,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional, Dict, Any
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from parent directory
+load_dotenv("../.env")
 
 
 class LLMConfig(BaseSettings):
