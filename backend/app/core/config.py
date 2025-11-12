@@ -33,7 +33,6 @@ class LLMConfig(BaseSettings):
 class VoiceConfig(BaseSettings):
     """Voice service configuration"""
     model_config = SettingsConfigDict(
-        env_file="../.env",
         env_prefix="VOICE_",
         case_sensitive=False,
         extra="ignore"
